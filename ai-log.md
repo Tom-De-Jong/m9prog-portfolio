@@ -74,3 +74,35 @@ Maak via **Pagina’s → Nieuwe pagina** deze pagina’s aan:
 2. `Contact` met slug `contact`
 
 Sla daarna de permalinks opnieuw op via **Instellingen → Permalinks → Wijzigingen opslaan**.
+
+## Les 3: custom theme structureren
+
+### Templatehiërarchie
+
+Voor een statische homepage zoekt WordPress eerst naar `front-page.php`. Daarom gebruikt dit theme `themes/portfolio/front-page.php` voor de homepage. Dit bestand laadt de bestaande portfolio-opmaak uit `index.php` en toont de herkenbare testkop `Template test: front-page.php`.
+
+Voor een gewone WordPress-pagina zoekt WordPress naar `page.php` voordat het terugvalt op `singular.php` of `index.php`. Dit theme gebruikt `themes/portfolio/page.php`, met de testkop `Template test: page.php`.
+
+`index.php` blijft de algemene fallback-template. De stylesheet wordt geladen met `wp_enqueue_style()` en `script.js` wordt geladen met `wp_enqueue_script()` in `functions.php`.
+
+### Effect van post-thumbnails
+
+`add_theme_support( 'post-thumbnails' )` vertelt WordPress dat dit theme uitgelichte afbeeldingen ondersteunt. Daardoor kan de WordPress-editor bij berichten en pagina’s een uitgelichte afbeelding instellen. Templates kunnen die afbeelding vervolgens tonen met functies zoals `the_post_thumbnail()`.
+
+### Getest
+
+| Functionaliteit/pagina | Verwachting | Daadwerkelijk resultaat |
+| --- | --- | --- |
+| Homepage `/` | WordPress kiest `front-page.php` en toont de testkop. | Geslaagd: de browser toont `Template test: front-page.php` en de portfolio-homepage. |
+| Over mij `/over-mij/` | WordPress kiest `page.php` en toont een andere testkop dan de homepage. | Geslaagd: de browser toont `Template test: page.php` en de Over mij-inhoud. |
+| Stylesheet en script | CSS en het nieuwe `script.js` worden via de enqueue-functies geladen. | Geslaagd: de styling is zichtbaar en browsercontrole vond één geladen `script.js`-asset. |
+| WordPress-pagina’s | De homepagina en Over mij-pagina zijn publiek bereikbaar. | Geslaagd voor de publieke routes. De admin-pagina vroeg om opnieuw inloggen, dus de database-instellingen zijn niet via de beheeromgeving gecontroleerd. |
+
+Er was geen fout tijdens de template- of browsercontrole. De ontbrekende `front-page.php` en script-enqueue zijn toegevoegd en daarna opnieuw getest. De PHP-lintcontrole en `git diff --check` zijn opnieuw uitgevoerd.
+
+### Les 3 commitcontrole
+
+- `git status --short` is gecontroleerd voordat bestanden werden toegevoegd.
+- Alleen themebestanden en deze documentatie zijn relevant voor deze wijziging.
+- `.env` staat in `.gitignore`; er zijn geen wachtwoorden, sleutels of andere gevoelige bestanden toegevoegd.
+- De commit wordt na het testen aangemaakt met een duidelijke Les 3-boodschap en naar `main` gepusht.

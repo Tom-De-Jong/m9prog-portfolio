@@ -20,6 +20,7 @@
 </header>
 <main id="main-content" class="page-shell">
 	<div class="site-container">
+		<p class="template-test-heading">Template test: page.php</p>
 		<p class="eyebrow">Tom De Jong</p>
 		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 			<article <?php post_class(); ?>>
