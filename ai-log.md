@@ -106,3 +106,32 @@ Er was geen fout tijdens de template- of browsercontrole. De ontbrekende `front-
 - Alleen themebestanden en deze documentatie zijn relevant voor deze wijziging.
 - `.env` staat in `.gitignore`; er zijn geen wachtwoorden, sleutels of andere gevoelige bestanden toegevoegd.
 - De commit wordt na het testen aangemaakt met een duidelijke Les 3-boodschap en naar `main` gepusht.
+
+## Les 4: header, footer en WordPress Loop
+
+### Nieuwe structuur
+
+- `header.php` bevat de HTML-head, `wp_head()`, `body_class()`, `wp_body_open()` en de gedeelde navigatie.
+- `footer.php` bevat copyright- en contactinformatie, `wp_footer()` en de afsluitende HTML-tags.
+- `index.php` en `page.php` gebruiken nu `get_header()` en `get_footer()`.
+- `page.php` gebruikt de WordPress Loop met `the_title()`, `the_post_thumbnail( 'large' )` wanneer beschikbaar en `the_content()` wanneer de pagina inhoud heeft.
+- `front-page.php` blijft de expliciete homepage-template en gebruikt de gedeelde wrappers via de bestaande homepage-rendering.
+
+### Testen
+
+| Functionaliteit/pagina | Verwachting | Daadwerkelijk resultaat |
+| --- | --- | --- |
+| Homepage `/` | Gedeelde header en footer worden geladen en de homepage toont `front-page.php`. | Geslaagd. Navigatie, homepage-inhoud, footer en `Template test: front-page.php` waren zichtbaar. |
+| Over mij `/over-mij/` | `page.php` gebruikt dezelfde header/footer en toont WordPress-paginainhoud via de Loop. | Geslaagd. `Template test: page.php`, de paginatitel, profielinhoud en gedeelde navigatie/footer waren zichtbaar. |
+| Contact `/contact/` | Een tweede gewone pagina gebruikt opnieuw `page.php`, met dynamische titel/content en dezelfde wrappers. | Geslaagd. De contacttitel, contacttekst, mailto-link, header en footer waren zichtbaar. |
+| WordPress REST-pagina’s | De geteste pagina’s bestaan als gepubliceerde WordPress-pagina’s in de database. | Geslaagd. `/wp-json/wp/v2/pages?slug=over-mij,contact` gaf beide gepubliceerde pagina’s terug. De editor-content is momenteel leeg; daarom toont `page.php` de bestaande slug-fallback. Bij ingevulde editor-content wordt `the_content()` weergegeven. |
+| Script enqueue | Het theme-script wordt via `wp_enqueue_script()` geladen. | Geslaagd. De browser vond één geladen `script.js`-asset. |
+
+Er was één structureel probleem: header en footer stonden eerst dubbel in meerdere templates. Dit is opgelost door `header.php` en `footer.php` te maken en de templates om te bouwen naar `get_header()` en `get_footer()`. Daarna zijn PHP-lint, diff-controle en browsercontroles opnieuw uitgevoerd.
+
+### Les 4 commitcontrole
+
+- `git status --short` en `git diff --stat` zijn gecontroleerd vóór commit.
+- Alleen de relevante themebestanden en `ai-log.md` zijn toegevoegd.
+- Er zijn geen `.env`-bestanden, wachtwoorden, sleutels of andere gevoelige bestanden toegevoegd.
+- De wijziging wordt gepusht met een duidelijke commit voor Les 4.

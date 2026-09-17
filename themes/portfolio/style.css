@@ -61,6 +61,8 @@ h2 { max-width: 600px; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.025e
 .section { padding: 90px 0; }
 .page-shell { min-height: 60vh; padding: 78px 0 110px; background: var(--white); }
 .page-shell h1 { max-width: 760px; font-size: clamp(2.8rem, 8vw, 5.5rem); }
+.page-featured-image { max-width: 720px; margin-top: 30px; }
+.page-featured-image img { display: block; width: 100%; height: auto; }
 .page-content { max-width: 720px; margin-top: 32px; color: var(--muted); font-size: 1.05rem; }
 .page-content h2, .page-content h3 { margin: 42px 0 14px; color: var(--ink); }
 .page-content p { margin: 0 0 18px; }

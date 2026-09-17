@@ -1,23 +1,4 @@
-<!doctype html>
-<html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<?php wp_head(); ?>
-</head>
-<body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<a class="skip-link" href="#main-content">Ga naar de inhoud</a>
-<header class="site-header">
-	<div class="site-container header-inner">
-		<a class="site-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Tom De Jong, naar home">TDJ<span>.</span></a>
-		<nav class="site-nav" aria-label="Hoofdnavigatie">
-			<a href="<?php echo esc_url( home_url( '/over-mij/' ) ); ?>">Over mij</a>
-			<a href="<?php echo esc_url( home_url( '/#projecten' ) ); ?>">Projecten</a>
-			<a class="nav-contact" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a>
-		</nav>
-	</div>
-</header>
+<?php get_header(); ?>
 <main id="main-content" class="page-shell">
 	<div class="site-container">
 		<p class="template-test-heading">Template test: page.php</p>
@@ -25,6 +6,9 @@
 		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 			<article <?php post_class(); ?>>
 				<h1><?php the_title(); ?></h1>
+				<?php if ( has_post_thumbnail() ) : ?>
+					<div class="page-featured-image"><?php the_post_thumbnail( 'large' ); ?></div>
+				<?php endif; ?>
 				<div class="page-content">
 					<?php if ( trim( get_the_content() ) ) : ?>
 						<?php the_content(); ?>
@@ -50,12 +34,4 @@
 		<?php endwhile; endif; ?>
 	</div>
 </main>
-<footer class="site-footer">
-	<div class="site-container footer-inner">
-		<span>© <?php echo esc_html( gmdate( 'Y' ) ); ?> Tom De Jong</span>
-		<a href="mailto:info@tomwebsites.nl">info@tomwebsites.nl</a>
-	</div>
-</footer>
-<?php wp_footer(); ?>
-</body>
-</html>
+<?php get_footer(); ?>
