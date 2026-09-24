@@ -7,9 +7,6 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<?php if ( isset( $portfolio_template_test_heading ) ) : ?>
-	<p class="template-test-heading"><?php echo esc_html( $portfolio_template_test_heading ); ?></p>
-<?php endif; ?>
 <a class="skip-link" href="#main-content">Ga naar de inhoud</a>
 <header class="site-header">
 	<div class="site-container header-inner">

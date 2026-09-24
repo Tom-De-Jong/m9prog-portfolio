@@ -67,6 +67,18 @@ h2 { max-width: 600px; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.025e
 .page-content h2, .page-content h3 { margin: 42px 0 14px; color: var(--ink); }
 .page-content p { margin: 0 0 18px; }
 .page-content a { color: var(--coral); }
+.page-content .wpcf7 { max-width: 620px; margin-top: 42px; padding: 32px; color: var(--ink); background: var(--paper); border-top: 4px solid var(--coral); }
+.page-content .wpcf7-form p { margin: 0 0 20px; }
+.page-content .wpcf7-form label { display: block; color: var(--ink); font-size: .86rem; font-weight: 700; letter-spacing: .02em; }
+.page-content .wpcf7-form-control-wrap { display: block; margin-top: 7px; }
+.page-content .wpcf7-form-control:not(.wpcf7-submit) { width: 100%; padding: 12px 14px; color: var(--ink); background: var(--white); border: 1px solid var(--line); border-radius: 0; font: inherit; font-size: .95rem; transition: border-color .2s ease, box-shadow .2s ease; }
+.page-content .wpcf7-form-control:not(.wpcf7-submit):focus { outline: 0; border-color: var(--coral); box-shadow: 0 0 0 3px rgba(226, 109, 82, .18); }
+.page-content .wpcf7-form-control.wpcf7-not-valid { border-color: #b54235; }
+.page-content textarea.wpcf7-form-control { min-height: 150px; resize: vertical; }
+.page-content .wpcf7-submit { padding: 13px 22px; color: var(--white); background: var(--ink); border: 2px solid var(--ink); border-radius: 0; font: inherit; font-size: .9rem; font-weight: 700; cursor: pointer; transition: color .2s ease, background-color .2s ease; }
+.page-content .wpcf7-submit:hover, .page-content .wpcf7-submit:focus-visible { color: var(--ink); background: transparent; }
+.page-content .wpcf7-spinner { margin: 0 0 0 10px; }
+.page-content .wpcf7-response-output { margin: 24px 0 0; padding: 12px 14px; border: 1px solid var(--line); color: var(--ink); font-size: .9rem; }
 .section-paper { background: var(--white); }
 .section-copy { max-width: 570px; color: var(--muted); }
 .section-copy p { margin-top: 0; }
@@ -113,4 +125,5 @@ h2 { max-width: 600px; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.025e
 	.section-heading { display: block; }
 	.section-heading > p { margin-top: 22px; }
 	.hero { padding-top: 50px; }
+	.page-content .wpcf7 { padding: 24px 20px; }
 }
