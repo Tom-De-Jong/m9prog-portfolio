@@ -1,1 +1,1 @@
-document.documentElement.classList.add( 'js' );
+(()=>{"use strict";document.documentElement.classList.add("js")})();

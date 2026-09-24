@@ -1,0 +1,24 @@
+$primary: #e26d52;
+$secondary: #b8c9bd;
+$body-bg: #f5f3ed;
+$body-color: #172526;
+$spacer: 1.25rem;
+$font-family-sans-serif: 'Trebuchet MS', Arial, sans-serif;
+
+@import "bootstrap/scss/bootstrap";
+
+:root {
+	--portfolio-primary: #{$primary};
+	--portfolio-space: #{$spacer};
+}
+
+.button-primary {
+	border: 2px solid $body-color;
+	transition: background-color .2s ease, color .2s ease;
+
+	&:hover,
+	&:focus-visible {
+		color: $body-color;
+		background: transparent;
+	}
+}

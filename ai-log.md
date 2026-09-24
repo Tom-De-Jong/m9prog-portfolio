@@ -135,3 +135,32 @@ Er was één structureel probleem: header en footer stonden eerst dubbel in meer
 - Alleen de relevante themebestanden en `ai-log.md` zijn toegevoegd.
 - Er zijn geen `.env`-bestanden, wachtwoorden, sleutels of andere gevoelige bestanden toegevoegd.
 - De wijziging wordt gepusht met een duidelijke commit voor Les 4.
+
+## Les 5: Sass, npm en Webpack
+
+### Build
+
+- `package.json` bevat `dev` voor een development watch-build en `build` voor een production-build.
+- Bootstrap 5 wordt via Sass geimporteerd in `src/styles.scss`.
+- Eigen variabelen overschrijven de Bootstrap-kleur, spacing en sans-serif typografie.
+- De bestaande portfolio-styling staat in `src/theme.scss` en wordt samen met Bootstrap gecompileerd.
+- Webpack schrijft alleen de gecompileerde `style.css` en `script.js` naar `themes/portfolio/`.
+- `functions.php` enqueuet deze twee theme-assets; bronbestanden uit `src/` worden niet rechtstreeks geladen.
+
+### Testen
+
+| Functionaliteit/pagina | Verwachting | Daadwerkelijk resultaat |
+| --- | --- | --- |
+| `npm install` | Dependencies worden uit `package.json` geïnstalleerd en vastgelegd in `package-lock.json`. | Geslaagd: 136 packages geïnstalleerd, zonder kwetsbaarheden. |
+| `npm run build` | Webpack compileert Bootstrap/Sass en JavaScript voor productie. | Geslaagd: `themes/portfolio/style.css` en `script.js` zijn gegenereerd. Sass gaf alleen upstream-deprecation warnings uit Bootstrap; de build eindigde succesvol. |
+| Productie-build twee keer uitvoeren | De tweede build moet dezelfde output opleveren en geen eerdere output opnieuw importeren. | Geslaagd: de tweede build rapporteerde `compared for emit`; de output groeide niet. |
+| Homepage in browser op `http://localhost/` | WordPress laadt alleen de gecompileerde assets en de homepage blijft visueel en functioneel werken. | Geslaagd: de browser vond `style.css` en `script.js`, de portfolio-secties waren zichtbaar en de eigen typografie/kleurstijl was actief. |
+
+Er was eerst een fout in de buildopzet waarbij de gegenereerde `style.css` opnieuw als input werd geïmporteerd. Dit is opgelost door de bestaande theme-styling naar `src/theme.scss` te verplaatsen en alleen die bronbestanden te bundelen.
+
+### Les 5 commitcontrole
+
+- `git status --short` is gecontroleerd.
+- `.env` staat in `.gitignore`; er zijn geen wachtwoorden, sleutels of andere gevoelige bestanden toegevoegd.
+- Relevante bestanden zijn `package.json`, `package-lock.json`, `webpack.config.js`, `src/` en de gecompileerde theme-assets.
+- PHP-lint en `git diff --check` zijn zonder fouten uitgevoerd.
